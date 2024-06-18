@@ -1,0 +1,90 @@
+@use "../node_modules/sass-pire/src/sass-pire.scss" as *;
+
+:root {
+    --white: hsl(0, 0%, 100%);
+    --light-gray: hsl(212, 45%, 89%);
+    --grayish-blue: hsl(220, 15%, 55%);
+    --dark-blue: hsl(218, 44%, 22%);
+    --ff: "Outfit";
+    --fw-400: 400;
+    --fw-700: 700;
+}
+
+@font-face {
+    font-display: swap;
+    font-family: "Outfit";
+    font-style: normal;
+    font-weight: 400;
+    src: url("../assets/fonts/outfit-v11-latin-regular.woff2") format("woff2");
+}
+
+@font-face {
+    font-display: swap;
+    font-family: "Outfit";
+    font-style: normal;
+    font-weight: 700;
+    src: url("../assets/fonts/outfit-v11-latin-700.woff2") format("woff2");
+}
+
+body {
+    @include flex-center-center;
+    background-color: var(--light-gray);
+    font-family: var(--ff);
+    color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --white: hsla(0, 0%, 91%, 0.966);
+        --light-gray: hsl(0, 0%, 16%);
+        --grayish-blue: hsl(0, 0%, 26%);
+        --dark-blue: hsl(218, 44%, 22%);
+    }
+}
+
+.app {
+    margin-block: 3rem;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+
+.qr-code {
+    $border-radius: 15;
+    
+    max-width: px-to-rem(350);
+    padding: px-to-rem(15);
+    border-radius: px-to-rem($border-radius);
+    @include flex-center-center(col);
+    gap: px-to-rem(18);
+    text-align: center;
+    background-color: var(--white);
+
+    &__img {
+        img {
+            border-radius: px-to-rem($border-radius);
+        }
+    }
+
+    &__desc {
+        max-width: 100%;
+        margin-inline: auto;
+        @include flex-center-center(col);
+        gap: px-to-rem(10);
+
+        @include mq-gen(min, w, sm) {
+            max-width: 88%;
+        }
+
+        .first-desc {
+            font-size: clamped(18px, 23px, 375px, 1440px);
+            font-weight: var(--fw-700);
+            color: var(--dark-blue);
+        }
+
+        .second-desc {
+            font-size: clamped(14.5px, 16.25px, 375px, 1440px);
+            color: var(--grayish-blue);
+            line-height: 1.3;
+        }
+    }
+}
